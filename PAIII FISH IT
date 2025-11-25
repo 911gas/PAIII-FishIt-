@@ -1,5 +1,5 @@
--- ⚡ PAIIII FISHIT SCRIPT - ULTRA SPEED FIXED
--- Ikan beneran masuk inventory, bukan visual doang!
+-- ⚡ PAIIII FISHIT - SANSMOBA STYLE
+-- 🎣 Tampilan mirip SansMoba, tapi Ultra Speed beneran work!
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -8,8 +8,8 @@ local VIM = game:GetService("VirtualInputManager")
 
 local player = Players.LocalPlayer
 
--- PAIIII Configuration
-local PAIIII = {
+-- Config mirip SansMoba
+local Config = {
     Enabled = false,
     Speed = 2, -- 1=Slow, 2=Normal, 3=Fast, 4=Ultra
     Method = 1,
@@ -18,183 +18,185 @@ local PAIIII = {
     LastInventory = 0
 }
 
--- PAIIII Speed Settings
-local PAIIIISpeeds = {
-    {Delay = 2.0, Name = "SLOW", Color = Color3.fromRGB(100, 200, 100)},
-    {Delay = 1.0, Name = "NORMAL", Color = Color3.fromRGB(100, 150, 255)},
-    {Delay = 0.5, Name = "FAST", Color = Color3.fromRGB(255, 200, 100)},
-    {Delay = 0.2, Name = "ULTRA", Color = Color3.fromRGB(255, 50, 50)}
+-- Speed levels dengan warna khas SansMoba
+local SpeedLevels = {
+    {Delay = 0.3, Name = "SLOW", Color = Color3.fromRGB(100, 200, 100)},
+    {Delay = 0.15, Name = "NORMAL", Color = Color3.fromRGB(100, 150, 255)},
+    {Delay = 0.06, Name = "FAST", Color = Color3.fromRGB(255, 200, 100)},
+    {Delay = 0.02, Name = "ULTRA", Color = Color3.fromRGB(255, 50, 50)}
 }
 
--- PAIIII Methods
-local PAIIIIMethods = {
+-- Methods mirip SansMoba
+local Methods = {
     {Text = "E KEY", Key = "E"},
     {Text = "MOUSE", Key = "Mouse"},
     {Text = "F KEY", Key = "F"},
     {Text = "R KEY", Key = "R"}
 }
 
--- Create PAIIII GUI
-local PAIIII_GUI = Instance.new("ScreenGui")
-PAIIII_GUI.Name = "PAIIIIFishIt"
-PAIIII_GUI.Parent = player:WaitForChild("PlayerGui")
+-- Create GUI mirip SansMoba
+local GUI = Instance.new("ScreenGui")
+GUI.Name = "SansMobaFishIt"
+GUI.Parent = player:WaitForChild("PlayerGui")
 
-local PAIIII_Main = Instance.new("Frame")
-PAIIII_Main.Size = UDim2.new(0, 300, 0, 250)
-PAIIII_Main.Position = UDim2.new(0, 10, 0, 10)
-PAIIII_Main.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
-PAIIII_Main.BorderSizePixel = 0
-PAIIII_Main.Parent = PAIIII_GUI
+-- Main Container - Warna dark blue khas SansMoba
+local Main = Instance.new("Frame")
+Main.Size = UDim2.new(0, 300, 0, 250)
+Main.Position = UDim2.new(0, 10, 0, 10)
+Main.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+Main.BorderSizePixel = 0
+Main.Parent = GUI
 
-local PAIIII_Corner = Instance.new("UICorner")
-PAIIII_Corner.CornerRadius = UDim.new(0, 8)
-PAIIII_Corner.Parent = PAIIII_Main
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(0, 8)
+Corner.Parent = Main
 
--- PAIIII Header
-local PAIIII_Header = Instance.new("Frame")
-PAIIII_Header.Size = UDim2.new(1, 0, 0, 40)
-PAIIII_Header.Position = UDim2.new(0, 0, 0, 0)
-PAIIII_Header.BackgroundColor3 = Color3.fromRGB(15, 15, 25)
-PAIIII_Header.BorderSizePixel = 0
-PAIIII_Header.Parent = PAIIII_Main
+-- Header - Dark blue header SansMoba
+local Header = Instance.new("Frame")
+Header.Size = UDim2.new(1, 0, 0, 40)
+Header.Position = UDim2.new(0, 0, 0, 0)
+Header.BackgroundColor3 = Color3.fromRGB(15, 15, 25)
+Header.BorderSizePixel = 0
+Header.Parent = Main
 
-local PAIIII_HeaderCorner = Instance.new("UICorner")
-PAIIII_HeaderCorner.CornerRadius = UDim.new(0, 8)
-PAIIII_HeaderCorner.Parent = PAIIII_Header
+local HeaderCorner = Instance.new("UICorner")
+HeaderCorner.CornerRadius = UDim.new(0, 8)
+HeaderCorner.Parent = Header
 
-local PAIIII_Title = Instance.new("TextLabel")
-PAIIII_Title.Size = UDim2.new(1, 0, 1, 0)
-PAIIII_Title.Position = UDim2.new(0, 0, 0, 0)
-PAIIII_Title.BackgroundTransparency = 1
-PAIIII_Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-PAIIII_Title.Text = "⚡ PAIIII FISHIT ⚡"
-PAIIII_Title.Font = Enum.Font.GothamBold
-PAIIII_Title.TextSize = 16
-PAIIII_Title.Parent = PAIIII_Header
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 1, 0)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Text = "SansMoba FishIt"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 16
+Title.Parent = Header
 
--- PAIIII Status Panel
-local PAIIII_Status = Instance.new("Frame")
-PAIIII_Status.Size = UDim2.new(0.9, 0, 0, 60)
-PAIIII_Status.Position = UDim2.new(0.05, 0, 0.18, 0)
-PAIIII_Status.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
-PAIIII_Status.BorderSizePixel = 0
-PAIIII_Status.Parent = PAIIII_Main
+-- Status Panel - Medium blue background
+local StatusFrame = Instance.new("Frame")
+StatusFrame.Size = UDim2.new(0.9, 0, 0, 60)
+StatusFrame.Position = UDim2.new(0.05, 0, 0.18, 0)
+StatusFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+StatusFrame.BorderSizePixel = 0
+StatusFrame.Parent = Main
 
-local PAIIII_StatusCorner = Instance.new("UICorner")
-PAIIII_StatusCorner.CornerRadius = UDim.new(0, 6)
-PAIIII_StatusCorner.Parent = PAIIII_Status
+local StatusCorner = Instance.new("UICorner")
+StatusCorner.CornerRadius = UDim.new(0, 6)
+StatusCorner.Parent = StatusFrame
 
-local PAIIII_StatusLabel = Instance.new("TextLabel")
-PAIIII_StatusLabel.Size = UDim2.new(1, 0, 0.5, 0)
-PAIIII_StatusLabel.Position = UDim2.new(0, 0, 0, 0)
-PAIIII_StatusLabel.BackgroundTransparency = 1
-PAIIII_StatusLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-PAIIII_StatusLabel.Text = "PAIIII Status: READY"
-PAIIII_StatusLabel.Font = Enum.Font.Gotham
-PAIIII_StatusLabel.TextSize = 14
-PAIIII_StatusLabel.Parent = PAIIII_Status
+local StatusLabel = Instance.new("TextLabel")
+StatusLabel.Size = UDim2.new(1, 0, 0.5, 0)
+StatusLabel.Position = UDim2.new(0, 0, 0, 0)
+StatusLabel.BackgroundTransparency = 1
+StatusLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+StatusLabel.Text = "Status: Ready"
+StatusLabel.Font = Enum.Font.Gotham
+StatusLabel.TextSize = 14
+StatusLabel.Parent = StatusFrame
 
-local PAIIII_Stats = Instance.new("TextLabel")
-PAIIII_Stats.Size = UDim2.new(1, 0, 0.5, 0)
-PAIIII_Stats.Position = UDim2.new(0, 0, 0.5, 0)
-PAIIII_Stats.BackgroundTransparency = 1
-PAIIII_Stats.TextColor3 = Color3.fromRGB(200, 200, 255)
-PAIIII_Stats.Text = "PAIIII Fish: 0 | Real: 0"
-PAIIII_Stats.Font = Enum.Font.Gotham
-PAIIII_Stats.TextSize = 12
-PAIIII_Stats.Parent = PAIIII_Status
+local StatsLabel = Instance.new("TextLabel")
+StatsLabel.Size = UDim2.new(1, 0, 0.5, 0)
+StatsLabel.Position = UDim2.new(0, 0, 0.5, 0)
+StatsLabel.BackgroundTransparency = 1
+StatsLabel.TextColor3 = Color3.fromRGB(200, 200, 255)
+StatsLabel.Text = "Fish: 0 | Real: 0"
+StatsLabel.Font = Enum.Font.Gotham
+StatsLabel.TextSize = 12
+StatsLabel.Parent = StatusFrame
 
--- PAIIII Speed Selection
-local PAIIII_SpeedFrame = Instance.new("Frame")
-PAIIII_SpeedFrame.Size = UDim2.new(0.9, 0, 0, 70)
-PAIIII_SpeedFrame.Position = UDim2.new(0.05, 0, 0.45, 0)
-PAIIII_SpeedFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
-PAIIII_SpeedFrame.BorderSizePixel = 0
-PAIIII_SpeedFrame.Parent = PAIIII_Main
+-- Speed Selection Frame - Mirip SansMoba
+local SpeedFrame = Instance.new("Frame")
+SpeedFrame.Size = UDim2.new(0.9, 0, 0, 70)
+SpeedFrame.Position = UDim2.new(0.05, 0, 0.45, 0)
+SpeedFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+SpeedFrame.BorderSizePixel = 0
+SpeedFrame.Parent = Main
 
-local PAIIII_SpeedCorner = Instance.new("UICorner")
-PAIIII_SpeedCorner.CornerRadius = UDim.new(0, 6)
-PAIIII_SpeedCorner.Parent = PAIIII_SpeedFrame
+local SpeedCorner = Instance.new("UICorner")
+SpeedCorner.CornerRadius = UDim.new(0, 6)
+SpeedCorner.Parent = SpeedFrame
 
-local PAIIII_SpeedTitle = Instance.new("TextLabel")
-PAIIII_SpeedTitle.Size = UDim2.new(1, 0, 0, 20)
-PAIIII_SpeedTitle.Position = UDim2.new(0, 0, 0, 5)
-PAIIII_SpeedTitle.BackgroundTransparency = 1
-PAIIII_SpeedTitle.TextColor3 = Color3.fromRGB(255, 255, 150)
-PAIIII_SpeedTitle.Text = "PAIIII SPEED SETTINGS"
-PAIIII_SpeedTitle.Font = Enum.Font.GothamBold
-PAIIII_SpeedTitle.TextSize = 12
-PAIIII_SpeedTitle.Parent = PAIIII_SpeedFrame
+local SpeedTitle = Instance.new("TextLabel")
+SpeedTitle.Size = UDim2.new(1, 0, 0, 20)
+SpeedTitle.Position = UDim2.new(0, 0, 0, 5)
+SpeedTitle.BackgroundTransparency = 1
+SpeedTitle.TextColor3 = Color3.fromRGB(255, 255, 150)
+SpeedTitle.Text = "SPEED SETTINGS"
+SpeedTitle.Font = Enum.Font.GothamBold
+SpeedTitle.TextSize = 12
+SpeedTitle.Parent = SpeedFrame
 
--- PAIIII Speed Buttons
-local PAIIII_SpeedButtons = {}
+-- Speed Buttons dengan warna khas SansMoba
+local SpeedButtons = {}
 for i = 1, 4 do
-    local PAIIII_Btn = Instance.new("TextButton")
-    PAIIII_Btn.Size = UDim2.new(0.22, 0, 0, 25)
-    PAIIII_Btn.Position = UDim2.new(0.03 + (0.24 * (i-1)), 0, 0.4, 0)
-    PAIIII_Btn.BackgroundColor3 = PAIIIISpeeds[i].Color
-    PAIIII_Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    PAIIII_Btn.Text = PAIIIISpeeds[i].Name
-    PAIIII_Btn.Font = Enum.Font.GothamBold
-    PAIIII_Btn.TextSize = 11
-    PAIIII_Btn.Parent = PAIIII_SpeedFrame
+    local SpeedBtn = Instance.new("TextButton")
+    SpeedBtn.Size = UDim2.new(0.22, 0, 0, 25)
+    SpeedBtn.Position = UDim2.new(0.03 + (0.24 * (i-1)), 0, 0.4, 0)
+    SpeedBtn.BackgroundColor3 = SpeedLevels[i].Color
+    SpeedBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    SpeedBtn.Text = SpeedLevels[i].Name
+    SpeedBtn.Font = Enum.Font.GothamBold
+    SpeedBtn.TextSize = 11
+    SpeedBtn.Parent = SpeedFrame
     
-    local PAIIII_BtnCorner = Instance.new("UICorner")
-    PAIIII_BtnCorner.CornerRadius = UDim.new(0, 4)
-    PAIIII_BtnCorner.Parent = PAIIII_Btn
+    local BtnCorner = Instance.new("UICorner")
+    BtnCorner.CornerRadius = UDim.new(0, 4)
+    BtnCorner.Parent = SpeedBtn
     
-    PAIIII_Btn.MouseButton1Click:Connect(function()
-        PAIIII.Speed = i
-        PAIIII_UpdateSpeed()
+    SpeedBtn.MouseButton1Click:Connect(function()
+        Config.Speed = i
+        UpdateSpeedButtons()
     end)
     
-    PAIIII_SpeedButtons[i] = PAIIII_Btn
+    SpeedButtons[i] = SpeedBtn
 end
 
--- PAIIII Control Buttons
-local PAIIII_Start = Instance.new("TextButton")
-PAIIII_Start.Size = UDim2.new(0.4, 0, 0, 35)
-PAIIII_Start.Position = UDim2.new(0.05, 0, 0.78, 0)
-PAIIII_Start.BackgroundColor3 = Color3.fromRGB(60, 180, 80)
-PAIIII_Start.TextColor3 = Color3.fromRGB(255, 255, 255)
-PAIIII_Start.Text = "PAIIII START"
-PAIIII_Start.Font = Enum.Font.GothamBold
-PAIIII_Start.TextSize = 14
-PAIIII_Start.Parent = PAIIII_Main
+-- Control Buttons - Hijau & Merah khas SansMoba
+local StartBtn = Instance.new("TextButton")
+StartBtn.Size = UDim2.new(0.4, 0, 0, 35)
+StartBtn.Position = UDim2.new(0.05, 0, 0.78, 0)
+StartBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 80)
+StartBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+StartBtn.Text = "START"
+StartBtn.Font = Enum.Font.GothamBold
+StartBtn.TextSize = 14
+StartBtn.Parent = Main
 
-local PAIIII_Stop = Instance.new("TextButton")
-PAIIII_Stop.Size = UDim2.new(0.4, 0, 0, 35)
-PAIIII_Stop.Position = UDim2.new(0.55, 0, 0.78, 0)
-PAIIII_Stop.BackgroundColor3 = Color3.fromRGB(180, 60, 80)
-PAIIII_Stop.TextColor3 = Color3.fromRGB(255, 255, 255)
-PAIIII_Stop.Text = "PAIIII STOP"
-PAIIII_Stop.Font = Enum.Font.GothamBold
-PAIIII_Stop.TextSize = 14
-PAIIII_Stop.Parent = PAIIII_Main
+local StopBtn = Instance.new("TextButton")
+StopBtn.Size = UDim2.new(0.4, 0, 0, 35)
+StopBtn.Position = UDim2.new(0.55, 0, 0.78, 0)
+StopBtn.BackgroundColor3 = Color3.fromRGB(180, 60, 80)
+StopBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+StopBtn.Text = "STOP"
+StopBtn.Font = Enum.Font.GothamBold
+StopBtn.TextSize = 14
+StopBtn.Parent = Main
 
--- PAIIII Method Button
-local PAIIII_Method = Instance.new("TextButton")
-PAIIII_Method.Size = UDim2.new(0.9, 0, 0, 25)
-PAIIII_Method.Position = UDim2.new(0.05, 0, 0.92, 0)
-PAIIII_Method.BackgroundColor3 = Color3.fromRGB(80, 80, 200)
-PAIIII_Method.TextColor3 = Color3.fromRGB(255, 255, 255)
-PAIIII_Method.Text = "PAIIII METHOD: E KEY"
-PAIIII_Method.Font = Enum.Font.GothamBold
-PAIIII_Method.TextSize = 12
-PAIIII_Method.Parent = PAIIII_Main
+-- Method Button - Biru khas SansMoba
+local MethodBtn = Instance.new("TextButton")
+MethodBtn.Size = UDim2.new(0.9, 0, 0, 25)
+MethodBtn.Position = UDim2.new(0.05, 0, 0.92, 0)
+MethodBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 200)
+MethodBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+MethodBtn.Text = "METHOD: E KEY"
+MethodBtn.Font = Enum.Font.GothamBold
+MethodBtn.TextSize = 12
+MethodBtn.Parent = Main
 
--- PAIIII Functions
-function PAIIII_UpdateSpeed()
-    for i, btn in ipairs(PAIIII_SpeedButtons) do
-        if i == PAIIII.Speed then
-            btn.BackgroundColor3 = Color3.fromRGB(255, 255, 100)
+-- Update Speed Buttons (highlight selected)
+function UpdateSpeedButtons()
+    for i, btn in ipairs(SpeedButtons) do
+        if i == Config.Speed then
+            btn.BackgroundColor3 = Color3.fromRGB(255, 255, 100) -- Kuning ketika selected
         else
-            btn.BackgroundColor3 = PAIIIISpeeds[i].Color
+            btn.BackgroundColor3 = SpeedLevels[i].Color
         end
     end
 end
 
-function PAIIII_GetRealFish()
+-- Real Fish Detection
+function GetRealFishCount()
     local count = 0
     local backpack = player:FindFirstChild("Backpack")
     if backpack then
@@ -207,10 +209,10 @@ function PAIIII_GetRealFish()
     return count
 end
 
--- PAIIII Fishing Action
-function PAIIII_Fish()
-    local speed = PAIIIISpeeds[PAIIII.Speed]
-    local method = PAIIIIMethods[PAIIII.Method]
+-- Fishing Function dengan ULTRA SPEED BENERAN
+function FishingAction()
+    local speed = SpeedLevels[Config.Speed]
+    local method = Methods[Config.Method]
     
     -- Cast
     if method.Key == "Mouse" then
@@ -223,8 +225,8 @@ function PAIIII_Fish()
         VIM:SendKeyEvent(false, method.Key, false, game)
     end
     
-    -- Wait
-    wait(speed.Delay * 0.6)
+    -- Wait for bite - TIMING BENERAN CEPAT!
+    wait(speed.Delay)
     
     -- Reel
     if method.Key == "Mouse" then
@@ -237,74 +239,85 @@ function PAIIII_Fish()
         VIM:SendKeyEvent(false, method.Key, false, game)
     end
     
-    -- Update
-    PAIIII.FishCount = PAIIII.FishCount + 1
-    local realCount = PAIIII_GetRealFish()
-    if realCount > PAIIII.RealFish then
-        PAIIII.RealFish = realCount
+    -- Update counters
+    Config.FishCount = Config.FishCount + 1
+    
+    -- Check real catch - BUKAN VISUAL DOANG!
+    local realCount = GetRealFishCount()
+    if realCount > Config.RealFish then
+        Config.RealFish = realCount
     end
     
-    PAIIII_Stats.Text = "PAIIII Fish: " .. PAIIII.FishCount .. " | Real: " .. PAIIII.RealFish
+    -- Update display
+    StatsLabel.Text = "Fish: " .. Config.FishCount .. " | Real: " .. Config.RealFish
 end
 
--- PAIIII Main Loop
-function PAIIII_Loop()
-    while PAIIII.Enabled do
-        PAIIII_Fish()
-        wait(PAIIIISpeeds[PAIIII.Speed].Delay * 0.4)
+-- Main Loop
+function FishingLoop()
+    while Config.Enabled do
+        FishingAction()
+        wait(SpeedLevels[Config.Speed].Delay * 0.5) -- Cooldown juga cepat!
     end
 end
 
--- PAIIII Button Events
-PAIIII_Start.MouseButton1Click:Connect(function()
-    if not PAIIII.Enabled then
-        PAIIII.Enabled = true
-        PAIIII_StatusLabel.Text = "PAIIII Status: FISHING ⚡"
-        PAIIII_StatusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
-        PAIIII_Start.BackgroundColor3 = Color3.fromRGB(30, 120, 50)
-        spawn(PAIIII_Loop)
+-- Button Events
+StartBtn.MouseButton1Click:Connect(function()
+    if not Config.Enabled then
+        Config.Enabled = true
+        Config.LastInventory = GetRealFishCount()
+        StatusLabel.Text = "Status: Fishing..."
+        StatusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+        StartBtn.BackgroundColor3 = Color3.fromRGB(30, 120, 50)
+        spawn(FishingLoop)
+        
+        print("⚡ SansMoba FishIt Activated!")
+        print("🎯 Speed: " .. SpeedLevels[Config.Speed].Name)
+        print("🎣 Real fish detection: ACTIVE")
     end
 end)
 
-PAIIII_Stop.MouseButton1Click:Connect(function()
-    PAIIII.Enabled = false
-    PAIIII_StatusLabel.Text = "PAIIII Status: STOPPED"
-    PAIIII_StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
-    PAIIII_Start.BackgroundColor3 = Color3.fromRGB(60, 180, 80)
+StopBtn.MouseButton1Click:Connect(function()
+    Config.Enabled = false
+    StatusLabel.Text = "Status: Stopped"
+    StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+    StartBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 80)
 end)
 
-PAIIII_Method.MouseButton1Click:Connect(function()
-    PAIIII.Method = PAIIII.Method + 1
-    if PAIIII.Method > #PAIIIIMethods then
-        PAIIII.Method = 1
+MethodBtn.MouseButton1Click:Connect(function()
+    Config.Method = Config.Method + 1
+    if Config.Method > #Methods then
+        Config.Method = 1
     end
-    PAIIII_Method.Text = "PAIIII METHOD: " .. PAIIIIMethods[PAIIII.Method].Text
+    MethodBtn.Text = "METHOD: " .. Methods[Config.Method].Text
 end)
 
--- PAIIII Hotkey
+-- Hotkey support
 UIS.InputBegan:Connect(function(input, processed)
     if processed then return end
-    if input.KeyCode == Enum.KeyCode.P then
-        PAIIII.Enabled = not PAIIII.Enabled
-        if PAIIII.Enabled then
-            PAIIII_StatusLabel.Text = "PAIIII Status: FISHING ⚡"
-            PAIIII_StatusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
-            PAIIII_Start.BackgroundColor3 = Color3.fromRGB(30, 120, 50)
-            spawn(PAIIII_Loop)
+    
+    if input.KeyCode == Enum.KeyCode.F then
+        Config.Enabled = not Config.Enabled
+        if Config.Enabled then
+            Config.LastInventory = GetRealFishCount()
+            StatusLabel.Text = "Status: Fishing..."
+            StatusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+            StartBtn.BackgroundColor3 = Color3.fromRGB(30, 120, 50)
+            spawn(FishingLoop)
         else
-            PAIIII_StatusLabel.Text = "PAIIII Status: STOPPED"
-            PAIIII_StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
-            PAIIII_Start.BackgroundColor3 = Color3.fromRGB(60, 180, 80)
+            StatusLabel.Text = "Status: Stopped"
+            StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+            StartBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 80)
         end
     end
 end)
 
--- PAIIII Initialize
-PAIIII_UpdateSpeed()
-PAIIII.LastInventory = PAIIII_GetRealFish()
-PAIIII.RealFish = PAIIII.LastInventory
-PAIIII_Stats.Text = "PAIIII Fish: 0 | Real: " .. PAIIII.RealFish
+-- Initialize
+UpdateSpeedButtons()
+Config.LastInventory = GetRealFishCount()
+Config.RealFish = Config.LastInventory
+StatsLabel.Text = "Fish: 0 | Real: " .. Config.RealFish
 
-print("⚡ PAIIII FISHIT LOADED!")
-print("🎣 Ultra Speed FIXED - Real fish detection ACTIVE!")
-print("🎮 Hotkey: Press P to start/stop")
+print("✅ SansMoba FishIt Loaded!")
+print("⚡ Ultra Speed: REAL (Not Visual)")
+print("🎮 Press F to start/stop")
+print("🎣 Real fish detection: ACTIVE")
